@@ -1,32 +1,42 @@
-.ov {
-  &#{$literal-separator} {
-    &v { overflow: visible }
-    &h { overflow: hidden }
-    &s { overflow: scroll }
-    &a { overflow: auto }
-  }
+@mixin overflow($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ov) {
+    &#{$literal-separator} {
+      &v {#{$last}{ overflow: visible }}
+      &h {#{$last}{ overflow: hidden }}
+      &s {#{$last}{ overflow: scroll }}
+      &a {#{$last}{ overflow: auto }}
+    }
 
-  &x#{$literal-separator} {
-    &v { overflow-x: visible }
-    &h { overflow-x: hidden }
-    &s { overflow-x: scroll }
-    &a { overflow-x: auto }
-  }
+    &x#{$literal-separator} {
+      &v {#{$last}{ overflow-x: visible }}
+      &h {#{$last}{ overflow-x: hidden }}
+      &s {#{$last}{ overflow-x: scroll }}
+      &a {#{$last}{ overflow-x: auto }}
+    }
 
-  &y#{$literal-separator} {
-    &v { overflow-y: visible }
-    &h { overflow-y: hidden }
-    &s { overflow-y: scroll }
-    &a { overflow-y: auto }
-  }
-
-  &w#{$literal-separator} {
-    &n { overflow-wrap: normal }
-    &b { overflow-wrap: break-word }
+    &y#{$literal-separator} {
+      &v {#{$last}{ overflow-y: visible }}
+      &h {#{$last}{ overflow-y: hidden }}
+      &s {#{$last}{ overflow-y: scroll }}
+      &a {#{$last}{ overflow-y: auto }}
+    }
   }
 }
 
-.-wovs#{$literal-separator} {
-  &t { -webkit-overflow-scrolling: touch }
-  &a { -webkit-overflow-scrolling: auto }
+@mixin overflow-wrap($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ovw) {
+    &w#{$literal-separator} {
+      &n {#{$last}{ overflow-wrap: normal }}
+      &b {#{$last}{ overflow-wrap: break-word }}
+    }
+  }
+}
+
+@mixin -webkit-overflow-scrolling($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, -wovs) {
+    &#{$literal-separator} {
+      &t {#{$last}{ -webkit-overflow-scrolling: touch }}
+      &a {#{$last}{ -webkit-overflow-scrolling: auto }}
+    }
+  }
 }

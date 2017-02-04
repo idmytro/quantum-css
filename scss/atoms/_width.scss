@@ -1,9 +1,21 @@
-@include create-responsive-classes(w)   { @include create-partials($widths, width) }
-@include create-responsive-classes(miw) { @include create-partials($widths, min-width) }
-@include create-responsive-classes(maw) {
-  &#{$literal-separator} {
-    &n { max-width: none }
+@mixin width($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, w) {
+    @include classes($values, $last, width)
   }
+}
 
-  @include create-partials($widths, max-width);
+@mixin min-width($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, miw) {
+    @include classes($values, $last, min-width)
+  }
+}
+
+@mixin max-width($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, maw) {
+    &#{$literal-separator} {
+      &n {#{$last}{ max-width: none }}
+    }
+
+    @include classes($values, $last, max-width)
+  }
 }

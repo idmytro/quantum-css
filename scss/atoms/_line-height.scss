@@ -1,13 +1,15 @@
-.lh {
-  &#{$literal-separator} {
-    &n { line-height: normal }
-    &i { line-height: inherit }
-  }
+@mixin line-height($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, lh) {
+    &#{$literal-separator} {
+      &n {#{$last}{ line-height: normal }}
+      &i {#{$last}{ line-height: inherit }}
+    }
 
-  &#{$ordinal-separator} {
-    &0 { line-height: 0 }
-    &1 { line-height: 1 }
-  }
+    &#{$ordinal-separator} {
+      &0 {#{$last}{ line-height: 0 }}
+      &1 {#{$last}{ line-height: 1 }}
+    }
 
-  @include create-partials($line-heights, line-height);
+    @include classes($values, $last, line-height)
+  }
 }

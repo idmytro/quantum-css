@@ -1,5 +1,9 @@
-.bxz#{$literal-separator} {
-  &cb { box-sizing: content-box }
-  &bb { box-sizing: border-box }
-  &i  { box-sizing: inherit }
+@mixin box-sizing($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bxz) {
+    &#{$literal-separator} {
+      &cb {#{$last}{ box-sizing: content-box }}
+      &bb {#{$last}{ box-sizing: border-box }}
+      &i  {#{$last}{ box-sizing: inherit }}
+    }
+  }
 }

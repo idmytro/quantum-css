@@ -1,92 +1,120 @@
-@include create-responsive-classes(fx) {
-  &#{$literal-separator} {
-    // Shorthands to create flex rows and columns by adding a single class name.
-    &r, &rr, &c, &cr { display: flex }
-  }
-
-  &,
-  &d {
+@mixin flex-direction($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fx) {
     &#{$literal-separator} {
-      &r  { flex-direction: row }
-      &rr { flex-direction: row-reverse }
-      &c  { flex-direction: column }
-      &cr { flex-direction: column-reverse }
+      // Shorthands to create flex rows and columns by adding a single class name.
+      &r, &rr, &c, &cr {#{$last}{ display: flex }}
+    }
+
+    &,
+    &d {
+      &#{$literal-separator} {
+        &r  {#{$last}{ flex-direction: row }}
+        &rr {#{$last}{ flex-direction: row-reverse }}
+        &c  {#{$last}{ flex-direction: column }}
+        &cr {#{$last}{ flex-direction: column-reverse }}
+      }
     }
   }
+}
 
-  &w#{$literal-separator} {
-    &nw { flex-wrap: nowrap }
-    &w  { flex-wrap: wrap }
-    &wr { flex-wrap: wrap-reverse }
-  }
-
-  &g#{$ordinal-separator} {
-    @for $grow from 0 through 10 {
-      &#{$grow} { flex-grow: $grow }
+@mixin flex-wrap($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fx) {
+    &w#{$literal-separator} {
+      &nw {#{$last}{ flex-wrap: nowrap }}
+      &w  {#{$last}{ flex-wrap: wrap }}
+      &wr {#{$last}{ flex-wrap: wrap-reverse }}
     }
   }
+}
 
-  &s#{$ordinal-separator} {
-    @for $shrink from 0 through 10 {
-      &#{$shrink} { flex-shrink: $shrink }
+@mixin flex-grow($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fx) {
+    &g#{$ordinal-separator} {
+      @for $grow from 0 through 10 {
+        &#{$grow} {#{$last}{ flex-grow: $grow }}
+      }
     }
   }
+}
 
-  &b#{$literal-separator} {
-    &a   { flex-basis: auto }
-    &mac { flex-basis: max-content }
-    &mic { flex-basis: min-content }
-    &fc  { flex-basis: fit-content }
-    &c   { flex-basis: content }
+@mixin flex-shrink($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fx) {
+    &s#{$ordinal-separator} {
+      @for $shrink from 0 through 10 {
+        &#{$shrink} {#{$last}{ flex-shrink: $shrink }}
+      }
+    }
   }
 }
 
-@include create-responsive-classes(jc) {
-  &#{$literal-separator} {
-    &fs { justify-content: flex-start }
-    &fe { justify-content: flex-end }
-    &c  { justify-content: center }
-    &sb { justify-content: space-between }
-    &sa { justify-content: space-around }
+@mixin flex-basis($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fx) {
+    &b#{$literal-separator} {
+      &a   {#{$last}{ flex-basis: auto }}
+      &mac {#{$last}{ flex-basis: max-content }}
+      &mic {#{$last}{ flex-basis: min-content }}
+      &fc  {#{$last}{ flex-basis: fit-content }}
+      &c   {#{$last}{ flex-basis: content }}
+    }
   }
 }
 
-@include create-responsive-classes(ai) {
-  &#{$literal-separator} {
-    &fs { align-items: flex-start }
-    &fe { align-items: flex-end }
-    &c  { align-items: center }
-    &bs { align-items: baseline }
-    &s  { align-items: stretch }
+@mixin justify-content($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, jc) {
+    &#{$literal-separator} {
+      &fs {#{$last}{ justify-content: flex-start }}
+      &fe {#{$last}{ justify-content: flex-end }}
+      &c  {#{$last}{ justify-content: center }}
+      &sb {#{$last}{ justify-content: space-between }}
+      &sa {#{$last}{ justify-content: space-around }}
+    }
   }
 }
 
-@include create-responsive-classes(ac) {
-  &#{$literal-separator} {
-    &fs { align-content: flex-start }
-    &fe { align-content: flex-end }
-    &c  { align-content: center }
-    &sb { align-content: space-between }
-    &sa { align-content: space-around }
-    &s  { align-content: stretch }
+@mixin align-items($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ai) {
+    &#{$literal-separator} {
+      &fs {#{$last}{ align-items: flex-start }}
+      &fe {#{$last}{ align-items: flex-end }}
+      &c  {#{$last}{ align-items: center }}
+      &bs {#{$last}{ align-items: baseline }}
+      &s  {#{$last}{ align-items: stretch }}
+    }
   }
 }
 
-@include create-responsive-classes(as) {
-  &#{$literal-separator} {
-    &a  { align-self: auto }
-    &fs { align-self: flex-start }
-    &fe { align-self: flex-end }
-    &c  { align-self: center }
-    &b  { align-self: baseline }
-    &s  { align-self: stretch }
+@mixin align-content($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ac) {
+    &#{$literal-separator} {
+      &fs {#{$last}{ align-content: flex-start }}
+      &fe {#{$last}{ align-content: flex-end }}
+      &c  {#{$last}{ align-content: center }}
+      &sb {#{$last}{ align-content: space-between }}
+      &sa {#{$last}{ align-content: space-around }}
+      &s  {#{$last}{ align-content: stretch }}
+    }
   }
 }
 
-@include create-responsive-classes(ord) {
-  &#{$ordinal-separator} {
-    @for $order from 0 through 10 {
-      &#{$order} { order: $order }
+@mixin align-self($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, as) {
+    &#{$literal-separator} {
+      &a  {#{$last}{ align-self: auto }}
+      &fs {#{$last}{ align-self: flex-start }}
+      &fe {#{$last}{ align-self: flex-end }}
+      &c  {#{$last}{ align-self: center }}
+      &b  {#{$last}{ align-self: baseline }}
+      &s  {#{$last}{ align-self: stretch }}
+    }
+  }
+}
+
+@mixin order($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ord) {
+    &#{$ordinal-separator} {
+      @for $order from 0 through 10 {
+        &#{$order} {#{$last}{ order: $order }}
+      }
     }
   }
 }

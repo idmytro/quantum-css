@@ -1,12 +1,15 @@
-@include create-responsive-classes(p) {
-  @include create-partials($paddings, padding);
+@mixin padding($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, p) {
+    @include classes($values, $last, padding);
 
-  &y, &t { @include create-partials($paddings, padding-top) }
-  &x, &r { @include create-partials($paddings, padding-right) }
+    &y, &t { @include classes($values, $last, padding-top) }
+    &x, &r { @include classes($values, $last, padding-right) }
 
-  &b#{$ordinal-separator} {
-    &100p { padding-bottom: 100% }
+    &b#{$ordinal-separator} {
+      &100p {#{$last}{ padding-bottom: 100% }}
+    }
+
+    &y, &b { @include classes($values, $last, padding-bottom) }
+    &x, &l { @include classes($values, $last, padding-left) }
   }
-  &y, &b { @include create-partials($paddings, padding-bottom) }
-  &x, &l { @include create-partials($paddings, padding-left) }
 }

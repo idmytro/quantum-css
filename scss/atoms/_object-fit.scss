@@ -1,8 +1,37 @@
-.of#{$literal-separator} {
-  &n  { object-fit: none }
-  &f  { object-fit: fill }
-  &ct { object-fit: contain }
-  &cv { object-fit: cover }
-  &sd { object-fit: scale-down }
-  &i  { object-fit: inherit }
+@mixin object-fit($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, of) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ object-fit: none }}
+      &f  {#{$last}{ object-fit: fill }}
+      &ct {#{$last}{ object-fit: contain }}
+      &cv {#{$last}{ object-fit: cover }}
+      &sd {#{$last}{ object-fit: scale-down }}
+      &i  {#{$last}{ object-fit: inherit }}
+    }
+  }
+}
+
+@mixin object-fit($media-queries: null, $extender: '&') {
+  @include scope($media-queries, of) {
+    @include classes(object-fit, $extender, (
+      n:  none,
+      f:  fill,
+      ct: contain,
+      cv: cover,
+      sd: scale-down,
+      i:  inherit
+    ));
+  }
+}
+
+
+@mixin object-fit($media-queries, $extender) {
+  @include spread($media-queries, of, $extender, object-fit, (
+    n:  none,
+    f:  fill,
+    ct: contain,
+    cv: cover,
+    sd: scale-down,
+    i:  inherit
+  ));
 }

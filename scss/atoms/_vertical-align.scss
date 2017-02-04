@@ -1,10 +1,14 @@
-.va#{$literal-separator} {
-  &sp { vertical-align: super }
-  &t  { vertical-align: top }
-  &tt { vertical-align: text-top }
-  &m  { vertical-align: middle }
-  &bs { vertical-align: baseline }
-  &b  { vertical-align: bottom }
-  &tb { vertical-align: text-bottom }
-  &sb { vertical-align: sub }
+@mixin vertical-align($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, va) {
+    &#{$literal-separator} {
+      &sp {#{$last}{ vertical-align: super }}
+      &t  {#{$last}{ vertical-align: top }}
+      &tt {#{$last}{ vertical-align: text-top }}
+      &m  {#{$last}{ vertical-align: middle }}
+      &bs {#{$last}{ vertical-align: baseline }}
+      &b  {#{$last}{ vertical-align: bottom }}
+      &tb {#{$last}{ vertical-align: text-bottom }}
+      &sb {#{$last}{ vertical-align: sub }}
+    }
+  }
 }

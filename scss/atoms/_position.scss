@@ -1,13 +1,15 @@
-@include create-responsive-classes(pos) {
-  &#{$literal-separator} {
-    &s { position: static }
-    &a { position: absolute }
-    &r { position: relative }
-    &f { position: fixed }
+@mixin position($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, pos) {
+    &#{$literal-separator} {
+      &s {#{$last}{ position: static }}
+      &a {#{$last}{ position: absolute }}
+      &r {#{$last}{ position: relative }}
+      &f {#{$last}{ position: fixed }}
+    }
   }
-}
 
-@include create-responsive-classes(t) { @include create-partials($positions, top) }
-@include create-responsive-classes(r) { @include create-partials($positions, right) }
-@include create-responsive-classes(b) { @include create-partials($positions, bottom) }
-@include create-responsive-classes(l) { @include create-partials($positions, left) }
+  @include scope($breakpoints, t) { @include classes($values, $last, top) }
+  @include scope($breakpoints, r) { @include classes($values, $last, right) }
+  @include scope($breakpoints, b) { @include classes($values, $last, bottom) }
+  @include scope($breakpoints, l) { @include classes($values, $last, left) }
+}

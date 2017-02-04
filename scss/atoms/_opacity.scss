@@ -1,5 +1,9 @@
-.op#{$ordinal-separator} {
-  @for $opacity from 0 through 100 {
-    &#{$opacity} { opacity: $opacity / 100 }
+@mixin opacity($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, op) {
+    &#{$ordinal-separator} {
+      @for $opacity from 0 through 100 {
+        &#{$opacity} {#{$last}{ opacity: $opacity / 100 }}
+      }
+    }
   }
 }

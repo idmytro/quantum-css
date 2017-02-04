@@ -1,1 +1,5 @@
-.bxs { @include create-cartesian-partials($box-shadows, box-shadow) }
+@mixin box-shadow($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bxs) {
+    @include classes($values, $last, box-shadow)
+  }
+}

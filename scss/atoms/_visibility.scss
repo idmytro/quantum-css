@@ -1,7 +1,9 @@
-@include create-responsive-classes(v) {
-  &#{$literal-separator} {
-    &v { visibility: visible }
-    &h { visibility: hidden }
-    &c { visibility: collapse }
+@mixin visibility($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, v) {
+    &#{$literal-separator} {
+      &v {#{$last}{ visibility: visible }}
+      &h {#{$last}{ visibility: hidden }}
+      &c {#{$last}{ visibility: collapse }}
+    }
   }
 }

@@ -1,15 +1,24 @@
-@include create-responsive-classes(m) {
-  @include create-partials($margins, margin);
+@mixin margin($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, m) {
+    @include classes($values, $last, margin);
 
-  &x#{$literal-separator} {
-    &a {
-      margin-left: auto;
-      margin-right: auto;
+    &y, &t { @include classes($values, $last, margin-top) }
+    &y, &b { @include classes($values, $last, margin-bottom) }
+
+    &x, &r {
+      &#{$literal-separator} {
+        &a {#{$last}{ margin-right: auto }}
+      }
+
+      @include classes($values, $last, margin-right)
+    }
+
+    &x, &l {
+      &#{$literal-separator} {
+        &a {#{$last}{ margin-left: auto }}
+      }
+
+      @include classes($values, $last, margin-left)
     }
   }
-
-  &y, &t { @include create-partials($margins, margin-top) }
-  &x, &r { @include create-partials($margins, margin-right) }
-  &y, &b { @include create-partials($margins, margin-bottom) }
-  &x, &l { @include create-partials($margins, margin-left) }
 }

@@ -1,5 +1,9 @@
-.us#{$literal-separator} {
-  &n { user-select: none }
-  &t { user-select: text }
-  &a { user-select: all }
+@mixin user-select($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, us) {
+    &#{$literal-separator} {
+      &n {#{$last}{ user-select: none }}
+      &t {#{$last}{ user-select: text }}
+      &a {#{$last}{ user-select: all }}
+    }
+  }
 }

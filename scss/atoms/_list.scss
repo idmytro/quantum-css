@@ -1,24 +1,34 @@
-.lis {
-  &#{$literal-separator} {
-    &n { list-style: none }
-    &i { list-style: inherit }
+@mixin list-style($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, lis) {
+    &#{$literal-separator} {
+      &n {#{$last}{ list-style: none }}
+      &i {#{$last}{ list-style: inherit }}
+    }
   }
+}
 
-  &p#{$literal-separator} {
-    &in { list-style-position: inside }
-    &o  { list-style-position: outside }
-    &i  { list-style-position: inherit }
+@mixin list-style-position($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, lisp) {
+    &#{$literal-separator} {
+      &in {#{$last}{ list-style-position: inside }}
+      &o  {#{$last}{ list-style-position: outside }}
+      &i  {#{$last}{ list-style-position: inherit }}
+    }
   }
+}
 
-  &t#{$literal-separator} {
-    &n    { list-style-type: none }
-    &d    { list-style-type: disc }
-    &c    { list-style-type: circle }
-    &s    { list-style-type: square }
-    &dc   { list-style-type: decimal }
-    &dclz { list-style-type: decimal-leading-zero }
-    &lr   { list-style-type: lower-roman }
-    &ur   { list-style-type: upper-roman }
-    &i    { list-style-type: inherit }
+@mixin list-style-type($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, list) {
+    &#{$literal-separator} {
+      &n    {#{$last}{ list-style-type: none }}
+      &d    {#{$last}{ list-style-type: disc }}
+      &c    {#{$last}{ list-style-type: circle }}
+      &s    {#{$last}{ list-style-type: square }}
+      &dc   {#{$last}{ list-style-type: decimal }}
+      &dclz {#{$last}{ list-style-type: decimal-leading-zero }}
+      &lr   {#{$last}{ list-style-type: lower-roman }}
+      &ur   {#{$last}{ list-style-type: upper-roman }}
+      &i    {#{$last}{ list-style-type: inherit }}
+    }
   }
 }

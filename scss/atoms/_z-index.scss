@@ -1,12 +1,14 @@
-.z {
-  &#{$literal-separator} {
-    &a { z-index: auto }
-    &i { z-index: inherit }
-  }
+@mixin z-index($max-z-index: 10, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, z) {
+    &#{$literal-separator} {
+      &a {#{$last}{ z-index: auto }}
+      &i {#{$last}{ z-index: inherit }}
+    }
 
-  &#{$ordinal-separator} {
-    @for $z-index from 0 through 10 { // 0 … 10
-      &#{$z-index} { z-index: $z-index }
+    &#{$ordinal-separator} {
+      @for $z-index from 0 through $max-z-index {
+        &#{$z-index} {#{$last}{ z-index: $z-index }}
+      }
     }
   }
 }

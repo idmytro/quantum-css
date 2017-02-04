@@ -1,6 +1,10 @@
-.rz#{$literal-separator} {
-  &n { resize: none }
-  &b { resize: both }
-  &h { resize: horizontal }
-  &v { resize: vertical }
+@mixin resize($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, rz) {
+    &#{$literal-separator} {
+      &n {#{$last}{ resize: none }}
+      &b {#{$last}{ resize: both }}
+      &h {#{$last}{ resize: horizontal }}
+      &v {#{$last}{ resize: vertical }}
+    }
+  }
 }

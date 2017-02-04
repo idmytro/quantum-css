@@ -1,6 +1,10 @@
-.cl#{$literal-separator} {
-  &l { clear: left }
-  &r { clear: right }
-  &b { clear: both }
-  &n { clear: none }
+@mixin clear($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, cl) {
+    &#{$literal-separator} {
+      &l {#{$last}{ clear: left }}
+      &r {#{$last}{ clear: right }}
+      &b {#{$last}{ clear: both }}
+      &n {#{$last}{ clear: none }}
+    }
+  }
 }

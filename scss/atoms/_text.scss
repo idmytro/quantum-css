@@ -1,54 +1,76 @@
-@include create-responsive-classes(t) {
-  &d { @include create-cartesian-partials($text-decorations, text-decoration) }
+@mixin text-decoration($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, td) {
+    @include classes($text-decorations, $last, text-decoration)
+  }
+}
 
-  &a {
+@mixin text-align($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ta) {
     &#{$literal-separator} {
-      &l { text-align: left }
-      &c { text-align: center }
-      &r { text-align: right }
-      &j { text-align: justify }
+      &l {#{$last}{ text-align: left }}
+      &c {#{$last}{ text-align: center }}
+      &r {#{$last}{ text-align: right }}
+      &j {#{$last}{ text-align: justify }}
     }
 
     &l#{$literal-separator} {
-      &l { text-align-last: left }
-      &c { text-align-last: center }
-      &r { text-align-last: right }
-      &j { text-align-last: justify }
+      &l {#{$last}{ text-align-last: left }}
+      &c {#{$last}{ text-align-last: center }}
+      &r {#{$last}{ text-align-last: right }}
+      &j {#{$last}{ text-align-last: justify }}
     }
   }
 }
 
-.t {
-  &i { @include create-partials($text-indents, text-indent) }
-
-  &ds#{$literal-separator} {
-    &s  { text-decoration-style: solid }
-    &db { text-decoration-style: double }
-    &dt { text-decoration-style: dotted }
-    &ds { text-decoration-style: dashed }
-    &w  { text-decoration-style: wavy }
-    &i  { text-decoration-style: inherit }
+@mixin text-decoration-style($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tds) {
+    &#{$literal-separator} {
+      &s  {#{$last}{ text-decoration-style: solid }}
+      &db {#{$last}{ text-decoration-style: double }}
+      &dt {#{$last}{ text-decoration-style: dotted }}
+      &ds {#{$last}{ text-decoration-style: dashed }}
+      &w  {#{$last}{ text-decoration-style: wavy }}
+      &i  {#{$last}{ text-decoration-style: inherit }}
+    }
   }
+}
 
-  &dsk#{$literal-separator} {
-    &n   { text-decoration-skip: none }
-    &o   { text-decoration-skip: objects }
-    &sp  { text-decoration-skip: spaces }
-    &i   { text-decoration-skip: ink }
-    &e   { text-decoration-skip: edges }
-    &bxd { text-decoration-skip: box-decoration }
+@mixin text-decoration-skip($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tdsk) {
+    &#{$literal-separator} {
+      &n   {#{$last}{ text-decoration-skip: none }}
+      &o   {#{$last}{ text-decoration-skip: objects }}
+      &sp  {#{$last}{ text-decoration-skip: spaces }}
+      &i   {#{$last}{ text-decoration-skip: ink }}
+      &e   {#{$last}{ text-decoration-skip: edges }}
+      &bxd {#{$last}{ text-decoration-skip: box-decoration }}
+    }
   }
+}
 
-  &t#{$literal-separator} {
-    &c  { text-transform: capitalize }
-    &u  { text-transform: uppercase }
-    &l  { text-transform: lowercase }
-    &n  { text-transform: none }
-    &fw { text-transform: full-width }
+@mixin text-indent($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ti) {
+    @include classes($text-indents, $last, text-indent)
   }
+}
 
-  &ov#{$literal-separator} {
-    &e { text-overflow: ellipsis }
-    &c { text-overflow: clip }
+@mixin text-transform($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tt) {
+    &#{$literal-separator} {
+      &c  {#{$last}{ text-transform: capitalize }}
+      &u  {#{$last}{ text-transform: uppercase }}
+      &l  {#{$last}{ text-transform: lowercase }}
+      &n  {#{$last}{ text-transform: none }}
+      &fw {#{$last}{ text-transform: full-width }}
+    }
+  }
+}
+
+@mixin text-overflow($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tov) {
+    &#{$literal-separator} {
+      &e {#{$last}{ text-overflow: ellipsis }}
+      &c {#{$last}{ text-overflow: clip }}
+    }
   }
 }

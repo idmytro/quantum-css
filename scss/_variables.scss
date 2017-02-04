@@ -1,7 +1,8 @@
+$breakpoints: 0;
+
 $media-separator:   '_' !default;
 $literal-separator: '-' !default;
 $ordinal-separator: '' !default;
-$pseudo-separator:  '-' !default;
 
 $media-queries: (
   null: null,
@@ -11,12 +12,6 @@ $media-queries: (
   XL: 'screen and (min-width: 1200px)',
 ) !default;
 
-// Pseudo-class and pseudo-element suffixes.
-$pseudos: (
-  hf: (hover, focus),
-  h: hover,
-  f: focus,
-) !default;
 
 
 // Grid

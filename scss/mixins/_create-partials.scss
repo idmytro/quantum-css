@@ -1,103 +1,44 @@
-@mixin respond-to($name, $media-queries: $media-queries) {
-  $media: map-get($media-queries, $name);
-  @if $media {
-    @media #{$media} { @content }
+@mixin respond-to($media-id, $media-queries: $media-queries) {
+  $media-value: map-get($media-queries, $media-id);
+  @if $media-value {
+    @media #{$media-value} { @content }
   }
   @else { @content }
 }
 
-@mixin create-responsive-classes(
-  $class,
-  $names: map-keys($media-queries),
-  $media-queries: $media-queries
-) {
-  @each $name in $names {
-    @include respond-to($name, $media-queries) {
-      .#{$name}#{if($name, $media-separator, null)}#{$class} {
-        @content;
+@mixin scope($medias, $name) {
+  @if ($medias) {
+    @each $media-id, $media-value in $medias {
+      @include respond-to($media-id, $media-value) {
+        .#{$media-id}#{if($media-id, $media-separator, null)}#{$name} {
+          @content;
+        }
       }
     }
   }
-}
-
-// Generates cartesian product of `$props` and `$value`.
-//
-// $props - list of CSS property names.
-// $value - value to assign to each property.
-@mixin spread-properties($props, $value) {
-  @each $prop in $props {
-    #{$prop}: $value;
+  @else {
+    .#{$name} { @content }
   }
 }
 
-// Choose separator depending on $value-id.
 @function value-sep($value-id) {
   @return if(str-length(#{$value-id}) == 0, null, if(type-of($value-id) == string, $literal-separator, $ordinal-separator));
 }
 
-// Generates partials for each id-value pair from `$values`.
-// Each partial is named `&#{id}` and contains each property from `$props` with value `#{value}`.
-//
-// $values - Map from partial id to value.
-// $props - List of CSS property names.
-// [$pseudo-ids = null] - List of pseudo-class or pseudo-element partial ids to add to generated classes.
-// [$pseudos = $pseudos] - Map from pseudo id to list of lists of pseudo-classes.
-@mixin create-partials(
+@mixin classes(
   $values,
-  $props,
-  $pseudo-ids:       null,
-  $pseudos:          $pseudos,
-  $create-no-pseudo: true
+  $last,
+  $props
 ) {
-  @each $value-id, $value in $values {
-    &#{value-sep($value-id)}#{$value-id} {
-
-      // Append pseudo ids to selector when needed.
-      @if $pseudo-ids {
-        $selectors-all: ();
-        @if $create-no-pseudo {
-          $selectors-all: &;
-        }
-        @each $pseudo-id in $pseudo-ids {
-          $selectors: ();
-          $pseudo-sets: map-get($pseudos, $pseudo-id);
-
-          // Pseudo-classes from space-separated list should be applied together.
-          @if list-separator($pseudo-sets) == space {
-            $pseudo-sets: ($pseudo-sets,);
+  @if $values {
+    @each $value-id, $value in $values {
+      &#{value-sep($value-id)}#{$value-id} {
+        #{$last} {
+          @each $prop in $props {
+            #{$prop}: $value;
           }
-
-          @each $pseudo-set in $pseudo-sets {
-            $selector: '';
-            @each $pseudo in $pseudo-set {
-              $selector: $selector + ':' + $pseudo;
-            }
-            $selectors: append($selectors, unquote($selector), comma);
-          }
-
-          $selectors-all: join($selectors-all, selector-append(&, #{$pseudo-separator}#{$pseudo-id}, $selectors), comma);
-        }
-
-        @at-root {
-          #{$selectors-all} {
-            @include spread-properties($props, $value);
-          }
-        }
-      }
-      @else {
-        @if $create-no-pseudo {
-          @include spread-properties($props, $value);
         }
       }
     }
   }
-}
-
-@mixin create-cartesian-partials(
-  $values,
-  $props,
-  $pseudo-ids: map-keys($pseudos),
-  $pseudos:    $pseudos
-) {
-  @include create-partials($values, $props, $pseudo-ids, $pseudos, true);
 }

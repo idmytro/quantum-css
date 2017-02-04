@@ -1,68 +1,99 @@
-@include create-responsive-classes(bg) {
-  &c { @include create-cartesian-partials($background-colors, background-color) }
+@mixin background-color($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgс) {
+    &#{$literal-separator} {
+      &cc {#{$last}{ background-color: currentColor }}
+      &tt {#{$last}{ background-color: transparent }}
+    }
+
+    @include classes($values, $last, background-color)
+  }
 }
 
-.bg {
-  &a#{$literal-separator} {
-    &f { background-attachment: fixed }
-    &s { background-attachment: scroll }
-  }
-
-  &cp#{$literal-separator} {
-    &bb { background-clip: border-box }
-    &pb { background-clip: padding-box }
-    &cb { background-clip: content-box }
-    &i  { background-clip: inherit }
-  }
-
-  &i#{$literal-separator} {
-    &n { background-image: none }
-    &i { background-image: inherit }
-  }
-
-  &o#{$literal-separator} {
-    &bb { background-origin: border-box }
-    &pb { background-origin: padding-box }
-    &cb { background-origin: content-box }
-  }
-
-  &p {
+@mixin background-attachment($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bga) {
     &#{$literal-separator} {
-      &tr { background-position: top right }
-      &tc { background-position: top center }
-      &tl { background-position: top left }
-      &cr { background-position: center right }
-      &cc { background-position: center center }
-      &cl { background-position: center left }
-      &br { background-position: bottom right }
-      &bc { background-position: bottom center }
-      &bl { background-position: bottom left }
+      &f {#{$last}{ background-attachment: fixed }}
+      &s {#{$last}{ background-attachment: scroll }}
+    }
+  }
+}
+
+@mixin background-clip($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgcp) {
+    &#{$literal-separator} {
+      &bb {#{$last}{ background-clip: border-box }}
+      &pb {#{$last}{ background-clip: padding-box }}
+      &cb {#{$last}{ background-clip: content-box }}
+      &i  {#{$last}{ background-clip: inherit }}
+    }
+  }
+}
+
+@mixin background-image($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgi) {
+    &#{$literal-separator} {
+      &n {#{$last}{ background-image: none }}
+      &i {#{$last}{ background-image: inherit }}
+    }
+  }
+}
+
+@mixin background-origin($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgo) {
+    &#{$literal-separator} {
+      &bb {#{$last}{ background-origin: border-box }}
+      &pb {#{$last}{ background-origin: padding-box }}
+      &cb {#{$last}{ background-origin: content-box }}
+    }
+  }
+}
+
+@mixin background-position($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgp) {
+    &#{$literal-separator} {
+      &tr {#{$last}{ background-position: top right }}
+      &tc {#{$last}{ background-position: top center }}
+      &tl {#{$last}{ background-position: top left }}
+      &cr {#{$last}{ background-position: center right }}
+      &cc {#{$last}{ background-position: center center }}
+      &cl {#{$last}{ background-position: center left }}
+      &br {#{$last}{ background-position: bottom right }}
+      &bc {#{$last}{ background-position: bottom center }}
+      &bl {#{$last}{ background-position: bottom left }}
     }
 
     &x#{$literal-separator} {
-      &r { background-position-x: right }
-      &c { background-position-x: center }
-      &l { background-position-x: left }
+      &r {#{$last}{ background-position-x: right }}
+      &c {#{$last}{ background-position-x: center }}
+      &l {#{$last}{ background-position-x: left }}
     }
 
     &y#{$literal-separator} {
-      &t { background-position-y: top }
-      &c { background-position-y: center }
-      &b { background-position-y: bottom }
+      &t {#{$last}{ background-position-y: top }}
+      &c {#{$last}{ background-position-y: center }}
+      &b {#{$last}{ background-position-y: bottom }}
     }
   }
+}
 
-  &r#{$literal-separator} {
-    &n { background-repeat: no-repeat }
-    &x { background-repeat: repeat-x }
-    &y { background-repeat: repeat-y }
-    &s { background-repeat: space }
-    &r { background-repeat: round }
+@mixin background-repeat($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgr) {
+    &#{$literal-separator} {
+      &n {#{$last}{ background-repeat: no-repeat }}
+      &x {#{$last}{ background-repeat: repeat-x }}
+      &y {#{$last}{ background-repeat: repeat-y }}
+      &s {#{$last}{ background-repeat: space }}
+      &r {#{$last}{ background-repeat: round }}
+    }
   }
+}
 
-  &z#{$literal-separator} {
-    &a  { background-size: auto }
-    &ct { background-size: contain }
-    &cv { background-size: cover }
+@mixin background-size($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bgz) {
+    &#{$literal-separator} {
+      &a  {#{$last}{ background-size: auto }}
+      &ct {#{$last}{ background-size: contain }}
+      &cv {#{$last}{ background-size: cover }}
+    }
   }
 }

@@ -1,9 +1,11 @@
-@include create-responsive-classes(ws) {
-  &#{$literal-separator} {
-    &n  { white-space: normal }
-    &p  { white-space: pre }
-    &nw { white-space: nowrap }
-    &pw { white-space: pre-wrap }
-    &pl { white-space: pre-line }
+@mixin white-space($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ws) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ white-space: normal }}
+      &p  {#{$last}{ white-space: pre }}
+      &nw {#{$last}{ white-space: nowrap }}
+      &pw {#{$last}{ white-space: pre-wrap }}
+      &pl {#{$last}{ white-space: pre-line }}
+    }
   }
 }

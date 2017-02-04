@@ -1,39 +1,42 @@
-@include create-responsive-classes(d) {
-  &#{$literal-separator} {
-    &n  { display: none }
-    &b  { display: block }
-    &fx { display: flex }
-    &li { display: list-item }
-    &ri { display: run-in }
+@mixin display($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, d) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ display: none }}
+      &n  {#{$last}{ display: none }}
+      &b  {#{$last}{ display: block }}
+      &fx {#{$last}{ display: flex }}
+      &li {#{$last}{ display: list-item }}
+      &ri {#{$last}{ display: run-in }}
 
-    &i {
-      display: inline;
+      &i {
+        #{$last}{ display: inline }
 
-      &tb { display: inline-table }
-      &fx { display: inline-flex }
-      &b  { display: inline-block }
-    }
+        &tb {#{$last}{ display: inline-table }}
+        &fx {#{$last}{ display: inline-flex }}
+        &b  {#{$last}{ display: inline-block }}
+      }
 
-    &tb {
-      display: table;
+      &tb {
+        #{$last}{ display: table }
 
-      &cp { display: table-caption }
-      &c  { display: table-column }
-      &cg { display: table-column-group }
-      &hg { display: table-header-group }
-      &fg { display: table-footer-group }
-      &r  { display: table-row }
-      &rg { display: table-row-group }
-      &cl { display: table-cell }
-    }
+        &cp {#{$last}{ display: table-caption }}
+        &c  {#{$last}{ display: table-column }}
+        &cg {#{$last}{ display: table-column-group }}
+        &hg {#{$last}{ display: table-header-group }}
+        &fg {#{$last}{ display: table-footer-group }}
+        &r  {#{$last}{ display: table-row }}
+        &rg {#{$last}{ display: table-row-group }}
+        &cl {#{$last}{ display: table-cell }}
+      }
 
-    &rb {
-      display: ruby;
+      &rb {
+        #{$last}{ display: ruby }
 
-      &b  { display: ruby-base }
-      &bc { display: ruby-base-container }
-      &t  { display: ruby-text }
-      &tc { display: ruby-text-container }
+        &b  {#{$last}{ display: ruby-base }}
+        &bc {#{$last}{ display: ruby-base-container }}
+        &t  {#{$last}{ display: ruby-text }}
+        &tc {#{$last}{ display: ruby-text-container }}
+      }
     }
   }
 }

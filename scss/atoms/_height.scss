@@ -1,9 +1,21 @@
-@include create-responsive-classes(h)   { @include create-partials($heights, height) }
-@include create-responsive-classes(mih) { @include create-partials($heights, min-height) }
-@include create-responsive-classes(mah) {
-  &#{$literal-separator} {
-    &n { max-height: none }
+@mixin height($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, h) {
+    @include classes($values, $last, height)
   }
+}
 
-  @include create-partials($heights, max-height);
+@mixin min-height($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, mih) {
+    @include classes($values, $last, min-height)
+  }
+}
+
+@mixin max-height($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, mah) {
+    &#{$literal-separator} {
+      &n {#{$last}{ max-height: none }}
+    }
+
+    @include classes($values, $last, max-height)
+  }
 }

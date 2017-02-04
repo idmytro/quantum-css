@@ -1,7 +1,12 @@
-@include create-responsive-classes(fl) {
-  &#{$literal-separator} {
-    &l { float: left }
-    &r { float: right }
-    &n { float: none }
+@mixin float($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fl) {
+    &#{$literal-separator} {
+
+
+
+      &l {#{$last}{ float: left }}
+      &r {#{$last}{ float: right }}
+      &n {#{$last}{ float: none }}
+    }
   }
 }

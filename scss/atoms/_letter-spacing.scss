@@ -1,8 +1,10 @@
-.ls {
-  &#{$literal-separator} {
-    &n { letter-spacing: normal }
-    &i { letter-spacing: inherit }
-  }
+@mixin letter-spacing($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ls) {
+    &#{$literal-separator} {
+      &n {#{$last}{ letter-spacing: normal }}
+      &i {#{$last}{ letter-spacing: inherit }}
+    }
 
-  @include create-partials($letter-spacings, letter-spacing);
+    @include classes($values, $last, letter-spacing)
+  }
 }

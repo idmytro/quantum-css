@@ -1,4 +1,8 @@
-.ve#{$literal-separator} {
-  &n   { vector-effect: none }
-  &nss { vector-effect: non-scaling-stroke }
+@mixin vector-effect($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ve) {
+    &#{$literal-separator} {
+      &n   {#{$last}{ vector-effect: none }}
+      &nss {#{$last}{ vector-effect: non-scaling-stroke }}
+    }
+  }
 }

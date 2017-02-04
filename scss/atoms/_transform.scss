@@ -1,64 +1,78 @@
-@include create-responsive-classes(ts) {
-  &#{$literal-separator} {
-    &n { transform: none }
-    &i { transform: inherit }
-  }
-
-  &r {
-    &#{$ordinal-separator} {
-      &0 { transform: rotate(0deg) }
-    }
-
+@mixin transform($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ts) {
     &#{$literal-separator} {
-      @for $i from 1 through 8 { // 45 … 360
-        $angle: $i * 45;
-        &ccw#{$angle}d { transform: rotate(-#{$angle}deg) }
-        &cw#{$angle}d  { transform: rotate( #{$angle}deg) }
-      }
+      &n {#{$last}{ transform: none }}
+      &i {#{$last}{ transform: inherit }}
     }
-  }
 
-  &sc#{$ordinal-separator} {
-    @for $i from 0 through 8 { // 0 … 2x
-      $scale: $i * 25;
-      &#{$scale} { transform: scale(#{$scale / 100}) }
-    }
-  }
-
-  &t {
-    @for $i from -4 through 4 { // -100% … 100%
-      $shift: $i * 25;
-
-      &x#{$ordinal-separator} {
-        &#{$shift}p { transform: translateX(#{$shift * 1%}) }
+    &r {
+      &#{$ordinal-separator} {
+        &0 {#{$last}{ transform: rotate(0deg) }}
       }
 
-      &y#{$ordinal-separator} {
-        &#{$shift}p { transform: translateY(#{$shift * 1%}) }
+      &#{$literal-separator} {
+        @for $i from 1 through 8 {
+          $angle: $i * 45;
+          &ccw#{$angle}d {#{$last}{ transform: rotate(-#{$angle}deg) }}
+          &cw#{$angle}d  {#{$last}{ transform: rotate( #{$angle}deg) }}
+        }
       }
     }
-  }
 
-  &s#{$literal-separator} {
-    &p3d { transform-style: preserve-3d }
-    &f   { transform-style: flat }
-    &i   { transform-style: inherit }
-  }
+    &sc#{$ordinal-separator} {
+      @for $i from 0 through 8 {
+        $scale: $i * 25;
+        &#{$scale} {#{$last}{ transform: scale(#{$scale / 100}) }}
+      }
+    }
 
-  &o#{$literal-separator} {
-    &lt { transform-origin: left top }
-    &lb { transform-origin: left bottom }
-    &lc { transform-origin: left center }
-    &rt { transform-origin: right top }
-    &rb { transform-origin: right bottom }
-    &rc { transform-origin: right center }
-    &ct { transform-origin: center top }
-    &cb { transform-origin: center bottom }
-    &cc { transform-origin: center center }
+    &t {
+      @for $i from -4 through 4 {
+        $shift: $i * 25;
+
+        &x#{$ordinal-separator} {
+          &#{$shift}p {#{$last}{ transform: translateX(#{$shift * 1%}) }}
+        }
+
+        &y#{$ordinal-separator} {
+          &#{$shift}p {#{$last}{ transform: translateY(#{$shift * 1%}) }}
+        }
+      }
+    }
   }
 }
 
-.bv#{$literal-separator} {
-  &v { backface-visibility: visible }
-  &h { backface-visibility: hidden }
+@mixin transform-style($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tss) {
+    &#{$literal-separator} {
+      &p3d {#{$last}{ transform-style: preserve-3d }}
+      &f   {#{$last}{ transform-style: flat }}
+      &i   {#{$last}{ transform-style: inherit }}
+    }
+  }
+}
+
+@mixin transform-origin($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tso) {
+    &#{$literal-separator} {
+      &lt {#{$last}{ transform-origin: left top }}
+      &lb {#{$last}{ transform-origin: left bottom }}
+      &lc {#{$last}{ transform-origin: left center }}
+      &rt {#{$last}{ transform-origin: right top }}
+      &rb {#{$last}{ transform-origin: right bottom }}
+      &rc {#{$last}{ transform-origin: right center }}
+      &ct {#{$last}{ transform-origin: center top }}
+      &cb {#{$last}{ transform-origin: center bottom }}
+      &cc {#{$last}{ transform-origin: center center }}
+    }
+  }
+}
+
+@mixin backface-visibility($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bv) {
+    &#{$literal-separator} {
+      &v {#{$last}{ backface-visibility: visible }}
+      &h {#{$last}{ backface-visibility: hidden }}
+    }
+  }
 }

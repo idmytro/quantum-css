@@ -1,99 +1,125 @@
-@include create-responsive-classes(f) {
-  &z {
+@mixin font-size($font-sizes, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fz) {
     &#{$literal-separator} {
-      &xxs {font-size: xx-small }
-      &xs  {font-size: x-small }
-      &s   {font-size: small }
-      &m   {font-size: medium }
-      &l   {font-size: large }
-      &xl  {font-size: x-large }
-      &xxl {font-size: xx-large }
-      &lr  {font-size: larger }
-      &sr  {font-size: smaller }
-      &i   {font-size: inherit }
+      &xxs {#{$last}{ font-size: xx-small }}
+      &xs  {#{$last}{ font-size: x-small }}
+      &s   {#{$last}{ font-size: small }}
+      &m   {#{$last}{ font-size: medium }}
+      &l   {#{$last}{ font-size: large }}
+      &xl  {#{$last}{ font-size: x-large }}
+      &xxl {#{$last}{ font-size: xx-large }}
+      &lr  {#{$last}{ font-size: larger }}
+      &sr  {#{$last}{ font-size: smaller }}
+      &i   {#{$last}{ font-size: inherit }}
     }
 
-    @include create-partials($font-sizes, font-size);
+    @include classes($font-sizes, $last, font-size)
   }
+}
 
-  &f {
+@mixin font-family($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ff) {
     &#{$literal-separator} {
-      &s  {font-family: serif }
-      &ss {font-family: sans-serif }
-      &m  {font-family: monospace }
-      &c  {font-family: cursive }
-      &f  {font-family: fantasy }
-      &i  {font-family: inherit }
+      &s  {#{$last}{ font-family: serif }}
+      &ss {#{$last}{ font-family: sans-serif }}
+      &m  {#{$last}{ font-family: monospace }}
+      &c  {#{$last}{ font-family: cursive }}
+      &f  {#{$last}{ font-family: fantasy }}
+      &i  {#{$last}{ font-family: inherit }}
     }
 
-    @include create-partials($font-families, font-family);
+    @include classes($values, $last, font-family)
   }
+}
 
-  &w {
+@mixin font-weight($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fw) {
     &#{$ordinal-separator} {
-      @for $weight from 1 through 9 { // 100 … 900
-        &#{$weight * 100} { font-weight: $weight * 100 }
+      @for $weight from 1 through 9 {
+        &#{$weight * 100} {#{$last}{ font-weight: $weight * 100 }}
       }
     }
 
     &#{$literal-separator} {
-      &n  { font-weight: normal }
-      &b  { font-weight: bold }
-      &br { font-weight: bolder }
-      &lr { font-weight: lighter }
-      &i  { font-weight: inherit }
+      &n  {#{$last}{ font-weight: normal }}
+      &b  {#{$last}{ font-weight: bold }}
+      &br {#{$last}{ font-weight: bolder }}
+      &lr {#{$last}{ font-weight: lighter }}
+      &i  {#{$last}{ font-weight: inherit }}
     }
   }
+}
 
-  &s#{$literal-separator} {
-    &n { font-style: normal }
-    &i { font-style: italic }
-    &o { font-style: oblique }
+@mixin font-style($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fs) {
+    &#{$literal-separator} {
+      &n {#{$last}{ font-style: normal }}
+      &i {#{$last}{ font-style: italic }}
+      &o {#{$last}{ font-style: oblique }}
+    }
   }
 }
 
-.f {
-  &v#{$literal-separator} {
-    &cl  { font-variant: common-ligatures }
-    &apc { font-variant: all-petite-caps }
-    &asc { font-variant: all-small-caps }
-    &sc  { font-variant: small-caps }
-    &c   { font-variant: contextual }
-    &df  { font-variant: diagonal-fractions }
-    &sf  { font-variant: stacked-fractions }
-    &hf  { font-variant: historical-forms }
-    &hl  { font-variant: historical-ligatures }
-    &i   { font-variant: inherit }
-    &n   { font-variant: normal }
-    &tn  { font-variant: tabular-nums }
-    &pn  { font-variant: proportional-nums }
-    &pw  { font-variant: proportional-width }
-  }
-
-  &za#{$literal-separator} {
-    &n { font-size-adjust: none }
-  }
-
-  &st#{$literal-separator} {
-    &n  { font-stretch: normal }
-    &uc { font-stretch: ultra-condensed }
-    &ec { font-stretch: extra-condensed }
-    &c  { font-stretch: condensed }
-    &sc { font-stretch: semi-condensed }
-    &se { font-stretch: semi-expanded }
-    &e  { font-stretch: expanded }
-    &ee { font-stretch: extra-expanded }
-    &ue { font-stretch: ultra-expanded }
+@mixin font-variant($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fv) {
+    &#{$literal-separator} {
+      &cl  {#{$last}{ font-variant: common-ligatures }}
+      &apc {#{$last}{ font-variant: all-petite-caps }}
+      &asc {#{$last}{ font-variant: all-small-caps }}
+      &sc  {#{$last}{ font-variant: small-caps }}
+      &c   {#{$last}{ font-variant: contextual }}
+      &df  {#{$last}{ font-variant: diagonal-fractions }}
+      &sf  {#{$last}{ font-variant: stacked-fractions }}
+      &hf  {#{$last}{ font-variant: historical-forms }}
+      &hl  {#{$last}{ font-variant: historical-ligatures }}
+      &i   {#{$last}{ font-variant: inherit }}
+      &n   {#{$last}{ font-variant: normal }}
+      &tn  {#{$last}{ font-variant: tabular-nums }}
+      &pn  {#{$last}{ font-variant: proportional-nums }}
+      &pw  {#{$last}{ font-variant: proportional-width }}
+    }
   }
 }
 
-.-wfsm#{$literal-separator} {
-  &a  { -webkit-font-smoothing: antialiased }
-  &sa { -webkit-font-smoothing: subpixel-antialiased }
-  &n  { -webkit-font-smoothing: none }
+@mixin font-size-adjust($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fza) {
+    &#{$literal-separator} {
+      &n {#{$last}{ font-size-adjust: none }}
+    }
+  }
 }
 
-.-mfsm#{$literal-separator} {
-  &a { -moz-osx-font-smoothing: auto }
-  &g { -moz-osx-font-smoothing: grayscale }
+@mixin font-stretch($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fst) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ font-stretch: normal }}
+      &uc {#{$last}{ font-stretch: ultra-condensed }}
+      &ec {#{$last}{ font-stretch: extra-condensed }}
+      &c  {#{$last}{ font-stretch: condensed }}
+      &sc {#{$last}{ font-stretch: semi-condensed }}
+      &se {#{$last}{ font-stretch: semi-expanded }}
+      &e  {#{$last}{ font-stretch: expanded }}
+      &ee {#{$last}{ font-stretch: extra-expanded }}
+      &ue {#{$last}{ font-stretch: ultra-expanded }}
+    }
+  }
+}
+
+@mixin -webkit-font-smoothing($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, -wfsm) {
+    &#{$literal-separator} {
+      &a  {#{$last}{ -webkit-font-smoothing: antialiased }}
+      &sa {#{$last}{ -webkit-font-smoothing: subpixel-antialiased }}
+      &n  {#{$last}{ -webkit-font-smoothing: none }}
+    }
+  }
+}
+
+@mixin -moz-osx-font-smoothing($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, -mfsm) {
+    &#{$literal-separator} {
+      &a {#{$last}{ -moz-osx-font-smoothing: auto }}
+      &g {#{$last}{ -moz-osx-font-smoothing: grayscale }}
+    }
+  }
 }

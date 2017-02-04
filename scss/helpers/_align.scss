@@ -1,0 +1,14 @@
+.align {
+  &#{$literal-separator} {
+    &tr, &tc, &tl { align-self: flex-start }
+    &br, &bc, &bl { align-self: flex-end }
+    &cr, &cc, &cl { align-self: center }
+
+    &tr, &cr, &br { margin-right: auto }
+    &tl, &cl, &bl { margin-left:  auto }
+    &tc, &cc, &bc {
+      margin-left:  auto;
+      margin-right: auto;
+    }
+  }
+}

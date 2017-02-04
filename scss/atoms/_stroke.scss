@@ -1,23 +1,41 @@
-.st {
-  @include create-cartesian-partials($border-colors, stroke);
-
-  &w { @include create-partials($border-widths, stroke-width) }
-
-  &lc#{$literal-separator} {
-    &b { stroke-linecap: butt }
-    &s { stroke-linecap: square }
-    &r { stroke-linecap: round }
+@mixin stroke($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, st) {
+    @include classes($values, $last, stroke)
   }
+}
 
-  &lj#{$literal-separator} {
-    &m { stroke-linejoin: miter }
-    &r { stroke-linejoin: round }
-    &b { stroke-linejoin: bevel }
+@mixin stroke-width($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, stw) {
+    @include classes($values, $last, stroke-width)
   }
+}
 
-  &op#{$ordinal-separator} {
-    @for $opacity from 0 through 100 {
-      &#{$opacity} { stroke-opacity: $opacity / 100 }
+@mixin stroke-linecap($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, stlc) {
+    &#{$literal-separator} {
+      &b {#{$last}{ stroke-linecap: butt }}
+      &s {#{$last}{ stroke-linecap: square }}
+      &r {#{$last}{ stroke-linecap: round }}
+    }
+  }
+}
+
+@mixin stroke-linejoin($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, stlj) {
+    &#{$literal-separator} {
+      &m {#{$last}{ stroke-linejoin: miter }}
+      &r {#{$last}{ stroke-linejoin: round }}
+      &b {#{$last}{ stroke-linejoin: bevel }}
+    }
+  }
+}
+
+@mixin stroke-opacity($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, stop) {
+    &#{$ordinal-separator} {
+      @for $opacity from 0 through 100 {
+        &#{$opacity} {#{$last}{ stroke-opacity: $opacity / 100 }}
+      }
     }
   }
 }

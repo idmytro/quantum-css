@@ -1,15 +1,25 @@
-.fi {
-  @include create-cartesian-partials($background-colors, fill);
-
-  &r#{$literal-separator} {
-    &nz { fill-rule: nonzero }
-    &eo { fill-rule: evenodd }
-    &i  { fill-rule: inherit }
+@mixin fill($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fi) {
+    @include classes($values, $last, fill)
   }
+}
 
-  &op#{$ordinal-separator} {
-    @for $opacity from 0 through 100 {
-      &#{$opacity} { fill-opacity: $opacity / 100 }
+@mixin fill-rule($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fir) {
+    &#{$literal-separator} {
+      &nz {#{$last}{ fill-rule: nonzero }}
+      &eo {#{$last}{ fill-rule: evenodd }}
+      &i  {#{$last}{ fill-rule: inherit }}
+    }
+  }
+}
+
+@mixin fill-opacity($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, fiop) {
+    &#{$ordinal-separator} {
+      @for $opacity from 0 through 100 {
+        &#{$opacity} {#{$last}{ fill-opacity: $opacity / 100 }}
+      }
     }
   }
 }

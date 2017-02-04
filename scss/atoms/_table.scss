@@ -1,24 +1,36 @@
-.tb {
-  &l#{$literal-separator} {
-    &a { table-layout: auto }
-    &f { table-layout: fixed }
+@mixin table-layout($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, tbl) {
+    &#{$literal-separator} {
+      &a {#{$last}{ table-layout: auto }}
+      &f {#{$last}{ table-layout: fixed }}
+    }
   }
 }
 
-.cps#{$literal-separator} {
-  &t { caption-side: top }
-  &b { caption-side: bottom }
+@mixin caption-side($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, cps) {
+    &#{$literal-separator} {
+      &t {#{$last}{ caption-side: top }}
+      &b {#{$last}{ caption-side: bottom }}
+    }
+  }
 }
 
-.ec#{$literal-separator} {
-  &s { empty-cells: show }
-  &h { empty-cells: hide }
+@mixin empty-cells($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, ec) {
+    &#{$literal-separator} {
+      &s {#{$last}{ empty-cells: show }}
+      &h {#{$last}{ empty-cells: hide }}
+    }
+  }
 }
 
-.bd {
-  &ce#{$literal-separator} {
-    &c { border-collapse: collapse }
-    &s { border-collapse: separate }
-    &i { border-collapse: inherit }
+@mixin border-collapse($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bdce) {
+    &#{$literal-separator} {
+      &c {#{$last}{ border-collapse: collapse }}
+      &s {#{$last}{ border-collapse: separate }}
+      &i {#{$last}{ border-collapse: inherit }}
+    }
   }
 }

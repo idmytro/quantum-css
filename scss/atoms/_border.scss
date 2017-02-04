@@ -1,25 +1,39 @@
-@include create-responsive-classes(bd) {
-  &c       { @include create-cartesian-partials($border-colors, border-color) }
-  &yc, &tc { @include create-cartesian-partials($border-colors, border-top-color) }
-  &xc, &rc { @include create-cartesian-partials($border-colors, border-right-color) }
-  &yc, &bc { @include create-cartesian-partials($border-colors, border-bottom-color) }
-  &xc, &lc { @include create-cartesian-partials($border-colors, border-left-color) }
+@mixin border-color($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bd) {
+    &c       { @include classes($values, $last, border-color) }
+    &yc, &tc { @include classes($values, $last, border-top-color) }
+    &xc, &rc { @include classes($values, $last, border-right-color) }
+    &yc, &bc { @include classes($values, $last, border-bottom-color) }
+    &xc, &lc { @include classes($values, $last, border-left-color) }
+  }
+}
 
-  &w       { @include create-partials($border-widths, border-width) }
-  &yw, &tw { @include create-partials($border-widths, border-top-width) }
-  &xw, &rw { @include create-partials($border-widths, border-right-width) }
-  &yw, &bw { @include create-partials($border-widths, border-bottom-width) }
-  &xw, &lw { @include create-partials($border-widths, border-left-width) }
+@mixin border-width($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bd) {
+    &w       { @include classes($values, $last, border-width) }
+    &yw, &tw { @include classes($values, $last, border-top-width) }
+    &xw, &rw { @include classes($values, $last, border-right-width) }
+    &yw, &bw { @include classes($values, $last, border-bottom-width) }
+    &xw, &lw { @include classes($values, $last, border-left-width) }
+  }
+}
 
-  &s       { @include create-partials($border-styles, border-style) }
-  &ys, &ts { @include create-partials($border-styles, border-top-style) }
-  &xs, &rs { @include create-partials($border-styles, border-right-style) }
-  &ys, &bs { @include create-partials($border-styles, border-bottom-style) }
-  &xs, &ls { @include create-partials($border-styles, border-left-style) }
+@mixin border-style($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bd) {
+    &s       { @include classes($values, $last, border-style) }
+    &ys, &ts { @include classes($values, $last, border-top-style) }
+    &xs, &rs { @include classes($values, $last, border-right-style) }
+    &ys, &bs { @include classes($values, $last, border-bottom-style) }
+    &xs, &ls { @include classes($values, $last, border-left-style) }
+  }
+}
 
-  &r             { @include create-partials($border-radiuses, border-radius) }
-  &tr, &rr, &trr { @include create-partials($border-radiuses, border-top-right-radius) }
-  &tr, &lr, &tlr { @include create-partials($border-radiuses, border-top-left-radius) }
-  &br, &rr, &brr { @include create-partials($border-radiuses, border-bottom-right-radius) }
-  &br, &lr, &blr { @include create-partials($border-radiuses, border-bottom-left-radius) }
+@mixin border-radius($values: null, $breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, bd) {
+    &r             { @include classes($values, $last, border-radius) }
+    &tr, &rr, &trr { @include classes($values, $last, border-top-right-radius) }
+    &tr, &lr, &tlr { @include classes($values, $last, border-top-left-radius) }
+    &br, &rr, &brr { @include classes($values, $last, border-bottom-right-radius) }
+    &br, &lr, &blr { @include classes($values, $last, border-bottom-left-radius) }
+  }
 }

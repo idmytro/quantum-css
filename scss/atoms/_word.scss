@@ -1,12 +1,18 @@
-.wo {
-  &b#{$literal-separator} {
-    &n  { word-break: normal }
-    &ka { word-break: keep-all }
-    &ba { word-break: break-all }
+@mixin word-break($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, wob) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ word-break: normal }}
+      &ka {#{$last}{ word-break: keep-all }}
+      &ba {#{$last}{ word-break: break-all }}
+    }
   }
+}
 
-  &w#{$literal-separator} {
-    &n  { word-wrap: normal }
-    &bw { word-wrap: break-word }
+@mixin word-wrap($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, wow) {
+    &#{$literal-separator} {
+      &n  {#{$last}{ word-wrap: normal }}
+      &bw {#{$last}{ word-wrap: break-word }}
+    }
   }
 }

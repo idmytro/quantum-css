@@ -1,22 +1,24 @@
-.pgb {
-  &b#{$literal-separator} {
-    &a  { page-break-before: auto }
-    &al { page-break-before: always }
-    &av { page-break-before: avoid }
-    &l  { page-break-before: left }
-    &r  { page-break-before: right }
-  }
+@mixin page-break($breakpoints: $breakpoints, $last: '&') {
+  @include scope($breakpoints, pgb) {
+    &b#{$literal-separator} {
+      &a  {#{$last}{ page-break-before: auto }}
+      &al {#{$last}{ page-break-before: always }}
+      &av {#{$last}{ page-break-before: avoid }}
+      &l  {#{$last}{ page-break-before: left }}
+      &r  {#{$last}{ page-break-before: right }}
+    }
 
-  &i#{$literal-separator} {
-    &a  { page-break-inside: auto }
-    &av { page-break-inside: avoid }
-  }
+    &i#{$literal-separator} {
+      &a  {#{$last}{ page-break-inside: auto }}
+      &av {#{$last}{ page-break-inside: avoid }}
+    }
 
-  &a#{$literal-separator} {
-    &a  { page-break-after: auto }
-    &al { page-break-after: always }
-    &av { page-break-after: avoid }
-    &l  { page-break-after: left }
-    &r  { page-break-after: right }
+    &a#{$literal-separator} {
+      &a  {#{$last}{ page-break-after: auto }}
+      &al {#{$last}{ page-break-after: always }}
+      &av {#{$last}{ page-break-after: avoid }}
+      &l  {#{$last}{ page-break-after: left }}
+      &r  {#{$last}{ page-break-after: right }}
+    }
   }
 }
